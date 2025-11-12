@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Master · Solo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <div class="container" id="main-container">
+        <div class="header text-center mb-8">
+            <a href="../index.html" class="text-4xl font-extrabold mb-2 block">Quiz Master</a>
+            <p class="text-gray-500 text-lg">Solo study mode. Load a quiz JSON to begin.</p>
+        </div>
+
+        <div id="upload-section" class="upload-section text-center p-8 rounded-xl cursor-pointer mb-8">
+            <div class="text-6xl text-indigo-600 mb-4">📚</div>
+            <h3 class="text-xl font-semibold text-gray-700">Drop your JSON file here or click to browse</h3>
+            <p class="text-gray-500 mt-2">Supported format: JSON with a <code>questions</code> array</p>
+            <button id="trigger-file-input" class="primary-btn mt-4 px-8 py-3 text-white rounded-full font-semibold">
+                Choose File
+            </button>
+            <input type="file" id="file-input" class="hidden" accept=".json">
+
+            <div class="bg-gray-800 text-gray-200 p-4 rounded-lg mt-6 text-left text-sm">
+<pre class="whitespace-pre-wrap">{
+  "questions": [
+    {
+      "question": "What is the capital of France?",
+      "options": ["London", "Berlin", "Paris", "Madrid"],
+      "correct": 2
+    }
+  ]
+}
+<span class="text-green-400">✨ Options automatically shuffle each time!</span></pre>
+            </div>
+        </div>
+
+        <div id="quiz-section" class="quiz-section" style="display:none;">
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6 overflow-hidden">
+                <div id="progress-fill" class="h-2.5 bg-indigo-500" style="width: 0%;"></div>
+            </div>
+
+            <div class="question-card bg-white rounded-xl p-6 shadow-lg">
+                <div id="question-number" class="text-indigo-600 font-bold text-sm mb-2"></div>
+                <div id="question-text" class="text-xl font-semibold text-gray-800 mb-6 leading-relaxed"></div>
+                <div id="answers-container"></div>
+                <div id="feedback" class="feedback p-3 mt-4 rounded-lg font-semibold" style="display:none;"></div>
+                <div class="flex justify-between mt-6">
+                    <button id="prev-btn" class="nav-btn text-white px-5 py-2 rounded-full font-semibold" style="display:none;">← Previous</button>
+                    <button id="next-btn" class="primary-btn text-white px-8 py-3 rounded-full font-semibold ml-auto" style="display:none;">Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="results-section" class="results-section text-center p-8" style="display:none;">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Quiz Complete! 🎉</h2>
+            <div class="w-40 h-40 rounded-full primary-btn flex items-center justify-center mx-auto mb-6 shadow-xl">
+                <span id="final-score" class="text-white text-4xl font-extrabold">0%</span>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="p-4 bg-white rounded-xl shadow">
+                    <div id="correct-count" class="text-3xl font-bold text-green-500">0</div>
+                    <div class="text-gray-500 text-sm mt-1">Correct</div>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow">
+                    <div id="wrong-count" class="text-3xl font-bold text-red-500">0</div>
+                    <div class="text-gray-500 text-sm mt-1">Wrong</div>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow">
+                    <div id="total-questions" class="text-3xl font-bold text-indigo-500">0</div>
+                    <div class="text-gray-500 text-sm mt-1">Total</div>
+                </div>
+                <div class="p-4 bg-white rounded-xl shadow">
+                    <div id="accuracy" class="text-3xl font-bold text-purple-500">0%</div>
+                    <div class="text-gray-500 text-sm mt-1">Accuracy</div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <button id="restart-quiz" class="action-btn primary-btn text-white px-6 py-3 rounded-full font-semibold">Retake Quiz</button>
+                <button id="review-wrong" class="action-btn bg-white text-indigo-600 border border-indigo-600 px-6 py-3 rounded-full font-semibold" style="display:none;">Review Wrong Answers</button>
+                <button id="new-quiz" class="action-btn bg-white text-indigo-600 border border-indigo-600 px-6 py-3 rounded-full font-semibold">Load New Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../assets/js/solo.js"></script>
+</body>
+</html>
